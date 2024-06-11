@@ -17,9 +17,9 @@ spring:
     name: boot-service
   redis:
     database: 0
-    host: dev.redis.java110.com
+    host: 127.0.0.1
     port: 6379
-    password: hc
+#    password: hc
     pool:
       max-active: 300
       max-wait: 3000
