@@ -192,9 +192,38 @@
 
     </dependencies>
 
+    <!-- 环境 -->
+    <profiles>
+        <!-- 开发 -->
+        <profile>
+            <id>dev</id>
+            <activation>
+                <!--默认激活配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!--开发环境-->
+                <profile.name>dev</profile.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <!--测试环境-->
+                <profile.name>debug</profile.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <!--生产环境-->
+                <profile.name>prod</profile.name>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
-        <finalName>MicroCommunityBoot</finalName>
+        <finalName>smart_community</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

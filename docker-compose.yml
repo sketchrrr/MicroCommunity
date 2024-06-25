@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  smart_community:
+    build: .
+    image: java:8
+    container_name: smart_community
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: "prod"
+    volumes:
+      - ./:/smart_community
+    depends_on:
+      - mysql
+      - redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    command: ["java", "-jar", "/smart_community/smart_community.jar"]
+    restart: always
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: smart_community
+      MYSQL_DATABASE: hc_community,tt
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./tmp/data/sql:/var/lib/mysql
+      - ./tmp/conf:/etc/mysql/conf.d
+      - ./:/smart_community
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    volumes:
+      - ./tmp/data/redis_data:/data
+    command: redis-server --notify-keyspace-events Ex
+    ports:
+      - "6379:6379"
