@@ -219,7 +219,6 @@ public class BootApplicationStart {
     }
 
 
-
     /**
      * 刷新主要的缓存
      *

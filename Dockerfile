@@ -12,8 +12,5 @@ RUN echo "127.0.0.1 dev.db.java110.com" >> /etc/hosts && \
 # 设置工作目录
 WORKDIR /smart_community
 
-# 将项目的JAR文件复制到容器中
-COPY smart_community.jar /smart_community/release.jar
-
 # 暴露应用的端口
 EXPOSE 8080

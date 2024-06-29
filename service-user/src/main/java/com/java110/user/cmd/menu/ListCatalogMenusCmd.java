@@ -93,15 +93,15 @@ public class ListCatalogMenusCmd extends Cmd {
         menuCatalogDto.setStoreType(storeDtos.get(0).getStoreTypeCd());
 
         List<Map> menus = menuCatalogV1InnerServiceSMOImpl.queryMenus(menuCatalogDto);
-        String lang = cmdDataFlowContext.getReqHeaders().get(CommonConstant.JAVA110_LANG);
-        if (!StringUtil.isEmpty(lang) && !CommonConstant.LANG_ZH_CN.equals(lang)) {
-            Language language = ApplicationContextFactory.getBean(lang, Language.class);
-            if (language != null) {
-                menus = language.getMenuDto(menus);
-            }
-
-        }
-
+//        String lang = cmdDataFlowContext.getReqHeaders().get(CommonConstant.JAVA110_LANG);
+//        if (!StringUtil.isEmpty(lang) && !CommonConstant.LANG_ZH_CN.equals(lang)) {
+//            Language language = ApplicationContextFactory.getBean(lang, Language.class);
+//            if (language != null) {
+//                menus = language.getMenuDto(menus);
+//            }
+//
+//        }
+        logger.debug("查询菜单信息：" + menus.toString());
         cmdDataFlowContext.setResponseEntity(refreshMenusInfo(menus));
     }
 

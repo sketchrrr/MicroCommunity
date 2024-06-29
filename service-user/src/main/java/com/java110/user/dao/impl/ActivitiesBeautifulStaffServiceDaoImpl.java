@@ -25,37 +25,36 @@ public class ActivitiesBeautifulStaffServiceDaoImpl extends BaseServiceDao imple
     private static Logger logger = LoggerFactory.getLogger(ActivitiesBeautifulStaffServiceDaoImpl.class);
 
 
-
-
-
     /**
      * 保存活动规则信息 到 instance
-     * @param info   bId 信息
+     *
+     * @param info bId 信息
      * @throws DAOException DAO异常
      */
     @Override
     public void saveActivitiesBeautifulStaffInfo(Map info) throws DAOException {
-        logger.debug("保存活动规则信息Instance 入参 info : {}",info);
+        logger.debug("保存活动规则信息Instance 入参 info : {}", info);
 
-        int saveFlag = sqlSessionTemplate.insert("activitiesBeautifulStaffServiceDaoImpl.saveActivitiesBeautifulStaffInfo",info);
+        int saveFlag = sqlSessionTemplate.insert("activitiesBeautifulStaffServiceDaoImpl.saveActivitiesBeautifulStaffInfo", info);
 
-        if(saveFlag < 1){
-            throw new DAOException(ResponseConstant.RESULT_PARAM_ERROR,"保存活动规则信息Instance数据失败："+ JSONObject.toJSONString(info));
+        if (saveFlag < 1) {
+            throw new DAOException(ResponseConstant.RESULT_PARAM_ERROR, "保存活动规则信息Instance数据失败：" + JSONObject.toJSONString(info));
         }
     }
 
 
     /**
      * 查询活动规则信息（instance）
+     *
      * @param info bId 信息
      * @return List<Map>
      * @throws DAOException DAO异常
      */
     @Override
     public List<Map> getActivitiesBeautifulStaffInfo(Map info) throws DAOException {
-        logger.debug("查询活动规则信息 入参 info : {}",info);
+        logger.debug("查询活动规则信息 入参 info : {}", info);
 
-        List<Map> businessActivitiesBeautifulStaffInfos = sqlSessionTemplate.selectList("activitiesBeautifulStaffServiceDaoImpl.getActivitiesBeautifulStaffInfo",info);
+        List<Map> businessActivitiesBeautifulStaffInfos = sqlSessionTemplate.selectList("activitiesBeautifulStaffServiceDaoImpl.getActivitiesBeautifulStaffInfo", info);
 
         return businessActivitiesBeautifulStaffInfos;
     }
@@ -63,28 +62,30 @@ public class ActivitiesBeautifulStaffServiceDaoImpl extends BaseServiceDao imple
 
     /**
      * 修改活动规则信息
+     *
      * @param info 修改信息
      * @throws DAOException DAO异常
      */
     @Override
     public void updateActivitiesBeautifulStaffInfo(Map info) throws DAOException {
-        logger.debug("修改活动规则信息Instance 入参 info : {}",info);
+        logger.debug("修改活动规则信息Instance 入参 info : {}", info);
 
-        int saveFlag = sqlSessionTemplate.update("activitiesBeautifulStaffServiceDaoImpl.updateActivitiesBeautifulStaffInfo",info);
+        int saveFlag = sqlSessionTemplate.update("activitiesBeautifulStaffServiceDaoImpl.updateActivitiesBeautifulStaffInfo", info);
 
-        if(saveFlag < 1){
-            throw new DAOException(ResponseConstant.RESULT_PARAM_ERROR,"修改活动规则信息Instance数据失败："+ JSONObject.toJSONString(info));
+        if (saveFlag < 1) {
+            throw new DAOException(ResponseConstant.RESULT_PARAM_ERROR, "修改活动规则信息Instance数据失败：" + JSONObject.toJSONString(info));
         }
     }
 
-     /**
+    /**
      * 查询活动规则数量
+     *
      * @param info 活动规则信息
      * @return 活动规则数量
      */
     @Override
     public int queryActivitiesBeautifulStaffsCount(Map info) {
-        logger.debug("查询活动规则数据 入参 info : {}",info);
+        logger.debug("查询活动规则数据 入参 info : {}", info);
 
         List<Map> businessActivitiesBeautifulStaffInfos = sqlSessionTemplate.selectList("activitiesBeautifulStaffServiceDaoImpl.queryActivitiesBeautifulStaffsCount", info);
         if (businessActivitiesBeautifulStaffInfos.size() < 1) {

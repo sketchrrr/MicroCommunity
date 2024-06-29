@@ -6,7 +6,7 @@ services:
     image: java:8
     container_name: smart_community
     ports:
-      - "8080:8080"
+      - "8008:8008"
     environment:
       SPRING_PROFILES_ACTIVE: "prod"
     volumes:
@@ -18,12 +18,12 @@ services:
       driver: "json-file"
       options:
         max-size: "10m"
-        max-file: "5"
-    command: ["java", "-jar", "/smart_community/smart_community.jar"]
+        max-file: "1"
+    command: [ "java", "-jar", "-Dfile.encoding=utf-8", "/smart_community/smart_community.jar" ]
     restart: always
 
   mysql:
-    image: mysql:latest
+    image: mysql:8.0
     container_name: mysql
     restart: always
     logging:
@@ -31,10 +31,16 @@ services:
       options:
         max-size: "10m"
         max-file: "5"
+    command: [
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci',
+      '--skip-character-set-client-handshake',
+      '--lower_case_table_names=1'
+    ]
     environment:
       TZ: Asia/Shanghai
       MYSQL_ROOT_PASSWORD: smart_community
-      MYSQL_DATABASE: hc_community,tt
+      MYSQL_DATABASE: hc_community tt
     ports:
       - "3306:3306"
     volumes:
@@ -56,3 +62,20 @@ services:
     command: redis-server --notify-keyspace-events Ex
     ports:
       - "6379:6379"
+
+  bytebase:
+    image: bytebase/bytebase:latest
+    container_name: bytebase
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./tmp/data/bytebase:/var/opt/bytebase

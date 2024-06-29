@@ -20,7 +20,7 @@ public class QuartzConfigurer implements SchedulerFactoryBeanCustomizer {
         schedulerFactoryBean.setDataSource(dataSource);
         schedulerFactoryBean.setStartupDelay(2);
         schedulerFactoryBean.setAutoStartup(true);
-        schedulerFactoryBean.setOverwriteExistingJobs(true);
+        schedulerFactoryBean.setOverwriteExistingJobs(false);
 
     }
 }
